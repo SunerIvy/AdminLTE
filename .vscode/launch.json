@@ -17,7 +17,7 @@
             "request": "launch",
             "cwd": "${workspaceRoot}",
             // "runtimeExecutable": "${workspaceroot}/node_modules/.bin/electron",
-            "runtimeExecutable": "/home/sunerivy/WebstormProjects/electron-quick-start/node_modules/electron/dist/electron",
+            "runtimeExecutable": "${workspaceRoot}/node_modules/electron/dist/electron",
             "args" : ["."]
         }
     ]
