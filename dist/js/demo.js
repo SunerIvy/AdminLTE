@@ -4,6 +4,17 @@
  * You should not use this file in production.
  * This file is for demo purposes only.
  */
+
+var jsdom = require('jsdom');
+ 
+const {JSDOM} = jsdom;
+const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
+global.document = dom;
+global.window = dom.window;
+global.$ = require('jquery');
+global.jQuery = require('jquery');
+require('./adminlte.js');
+
 $(function () {
     'use strict'
 
@@ -53,7 +64,7 @@ $(function () {
         if (typeof (Storage) !== 'undefined') {
             return localStorage.getItem(name)
         } else {
-            window.alert('Please use a modern browser to properly view this template!')
+            // window.alert('Please use a modern browser to properly view this template!')
         }
     }
 
@@ -350,5 +361,5 @@ $(function () {
 
     setup()
 
-    $('[data-toggle="tooltip"]').tooltip()
+    // $('[data-toggle="tooltip"]').tooltip()
 })
