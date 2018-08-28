@@ -5,15 +5,6 @@
  * This file is for demo purposes only.
  */
 
-var jsdom = require('jsdom');
- 
-const {JSDOM} = jsdom;
-const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
-global.document = dom;
-global.window = dom.window;
-global.$ = require('jquery');
-global.jQuery = require('jquery');
-require('./adminlte.js');
 
 $(function () {
     'use strict'

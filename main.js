@@ -7,15 +7,6 @@ const globalShortcut = electron.globalShortcut;
 
 const path = require('path')
 const url = require('url')
-var jsdom = require('jsdom');
- 
-const {JSDOM} = jsdom;
-const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`);
-global.document = dom;
-global.window = dom.window;
-global.$ = require('jquery');
-global.jQuery = require('jquery');
-require('./dist/js/adminlte.js');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -23,7 +14,12 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({
+    width: 800, 
+    height: 600,
+    title: 'SunerIvy',
+    titleBarStyle: 'hidden'
+  })
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({
@@ -38,6 +34,7 @@ function createWindow () {
       mainWindow.closeDevTools({mode:'bottom'});
     }else{
       mainWindow.openDevTools({mode:'bottom'});
+      console.log('%c本项目基于开源项目[ADMINLTE]，转载请注明出处，向开源致敬！', 'font-size: 30px;color: red');
     }
   })
 
