@@ -41,7 +41,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-  
+  <header class="main-header" id="main-header"></header>
   
   <aside class="main-sidebar" id="main-sidebar"></aside>
 
@@ -565,12 +565,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
-    </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+  <footer class="main-footer" id="main-footer">
   </footer>
 
   <!-- Control Sidebar -->
@@ -777,7 +772,9 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
+  $('#main-header').load('common/page/header.html');
   $('#main-sidebar').load('common/page/menu.html');
+  $('#main-footer').load('common/page/footer.html');
   // alert('test')
 </script>
 <!-- Bootstrap 3.3.7 -->
