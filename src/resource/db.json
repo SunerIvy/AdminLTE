@@ -1,0 +1,6 @@
+{
+    "dbType": "sqlite",
+    "sqlite": {
+        "path": "ivy.db"
+    }
+}
