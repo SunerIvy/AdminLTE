@@ -1,6 +1,9 @@
 {
-    "dbType": "sqlite",
-    "sqlite": {
-        "path": "ivy.db"
+    "dbType": "mysql",
+    "mysql": {
+        "host": "127.0.0.1",
+        "username": "root",
+        "password": "root",
+        "database": "mysql"
     }
 }

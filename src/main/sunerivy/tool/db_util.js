@@ -1,19 +1,23 @@
-let sqliteDao = require('../dao/sqlite_dao');
-let mysqlDao = require('../dao/mysql_dao');
-let baseDao = require('../dao/base_dao');
+let getConnection = () => {
+    let host = dbObj.host;
+    let username = dbObj.username;
+    let password = dbObj.password;
+    let database = dbObj.database;
 
-let dbType = baseDao.dbType;
-
-/**
- * query the result
- * @param {String} sql 
- * @param {Array} param 
- */
-let query = (sql, param) => {
-    if('sqlite' == dbType){
-        return sqliteDao.get(sql, param);
-    } else if('mysql' == dbType){
-        
-    }
+    let mysql      = require('mysql');
+    connection = mysql.createConnection({
+        host     : host,
+        user     : username,
+        password : password,
+        database : database
+    });
+    
+    connection.connect((error) => {
+        if(error){
+            throw error;
+        }else{
+            console.log('[db] [mysql] connection success!');
+        }
+    });
+    return connection;
 }
-

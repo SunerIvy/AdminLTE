@@ -1,6 +1,18 @@
-let baseDao = require('./base_dao');
-let connection = baseDao.getConnection();
+let {dbConfig} = require('../tool/config_util');
+let dbObj = dbConfig;
 
+let getConnection = function(){
+    let path = dbObj.path;
+    let sqlite = require('sqlite3');
+    connection = new sqlite.Database(path, function(error){
+        if(error){
+            throw error;
+        }else{
+            console.log('[db] [sqlite] connection success!');
+        }
+    })
+    return connection;
+}
 let run = (sql, paramAry) => {
     connection.run(sql, paramAry, function(error){
         if(error) {
@@ -22,4 +34,4 @@ let get = (sql, paramAry) => {
 }
 
 exports.run = run;
-exports.get = get;
+exports.query = get;

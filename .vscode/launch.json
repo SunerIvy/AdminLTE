@@ -8,7 +8,8 @@
             "type": "node",
             "request": "launch",
             "name": "Test Main",
-            "program": "${workspaceFolder}/src/main/sunerivy/tool/db_util.js",
+            // "program": "${workspaceFolder}/src/main/sunerivy/dao/mysql_dao.js",
+            "program": "${workspaceFolder}/src/test/test.js",
             // "protocol": "legacy"
         },
         {
