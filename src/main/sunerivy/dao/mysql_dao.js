@@ -26,14 +26,14 @@ void function() {
     // });
 }();
 
-let query = (sql, param) => {
+let query = (sql, param, callback) => {
     let result ;
     pool.getConnection(function(error, connection){
         connection.query( sql , param , function(error,res){
             if(error){
                 throw error;
             }
-            result = res;
+            callback(res);
         });
         connection.release();
     })
