@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>平台 - SunerIvy</title>
+    <meta name=”renderer” content=”ie-comp” />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content='' />
+    <link rel="shortcut icon" type="image/ico" href="">
+    <style type='text/css'>
+        body {
+            font-family: 'Microsoft Yahei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+    </style>
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+        folder instead of downloading all of them to reduce the load. -->
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../../dist/css/designer/ui.css">
+    <link rel="stylesheet" href="../../dist/css/designer/designer.css">
+    <link rel="stylesheet" href="../../dist/css/designer/global.css">
+
+    <!-- jQuery 3 -->
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+</head>
+
+<body>
+    <canvas id="support_canvas" style="display: none;"></canvas>
+    <script type="text/javascript">
+    </script>
+    <div id="designer_header">
+        <div class="titlebar">
+            <div class="row row2 menubar">
+                <ul id="menu_bar">
+                    <li id="menu_bar_file" menu="bar_list_file">
+                        <i class="fa fa-file"></i>文件</li>
+                    <li id="menu_bar_edit" menu="bar_list_edit">
+                        <i class="fa fa-edit"></i>编辑</li>
+                    <li id="menu_bar_view" menu="bar_list_view">
+                        <i class="fa fa-television"></i>视图</li>
+                    <li id="menu_bar_insert" menu="bar_list_insert">
+                        <i class="fa fa-plus-square"></i>插入</li>
+                    <li id="menu_bar_page" menu="bar_list_page">
+                        <i class="fa fa-newspaper-o"></i>页面</li>
+                    <li id="menu_bar_arrange" menu="bar_list_arrange">
+                        <i class="fa fa-bars"></i>排列</li>
+                    <li id="menu_bar_help" menu="bar_list_help">
+                        <i class="fa fa-exclamation-triangle"></i>帮助</li>
+                </ul>
+                <div id="saving_tip"></div>
+            </div>
+        </div>
+        <div class="toolbar">
+            <!-- Theme -->
+            <!--
+        <div id="bar_theme" class="toolbar_button" title='切换风格'><div class="ico theme"></div></div>
+		<div class="toolbar_devider"></div>
+        -->
+            <!-- Clipboard -->
+            <div id="bar_undo" class="toolbar_button" title='撤销 (Ctrl+Z)'>
+                <div class="ico undo"></div>
+            </div>
+            <div id="bar_redo" class="toolbar_button" title='恢复 (Ctrl+Y)'>
+                <div class="ico redo"></div>
+            </div>
+            <div id="bar_brush" class="toolbar_button" title='格式刷 (Ctrl+Shift+B)'>
+                <div class="ico brush"></div>
+            </div>
+            <div class="toolbar_devider"></div>
+            <!-- Font -->
+            <div id="bar_font_family" title='字体' class="toolbar_button" style="width: 80px;">
+                <div class="text_content">Arial</div>
+                <div class="ico ico_dropdown"></div>
+            </div>
+            <div class="toolbar_small_devider"></div>
+            <div id="bar_font_size" title='字号' class="spinner" style="width: 50px;"></div>
+            <div class="toolbar_small_devider"></div>
+            <div id="bar_font_bold" title='粗体 (Ctrl+B)' class="toolbar_button">
+                <div class="ico bold"></div>
+            </div>
+            <div id="bar_font_italic" title='斜体 (Ctrl+I)' class="toolbar_button">
+                <div class="ico italic"></div>
+            </div>
+            <div id="bar_font_underline" title='下划线 (Ctrl+U)' class="toolbar_button">
+                <div class="ico underline"></div>
+            </div>
+            <div id="bar_font_color" title='文本颜色' class="toolbar_button drop_button">
+                <div class="ico fontcolor"></div>
+                <div class="btn_color" style="background-color: rgb(50,50,50)"></div>
+                <div class="ico ico_dropdown"></div>
+            </div>
+            <div id="bar_font_align" title='对齐' class="toolbar_button drop_button">
+                <div class="ico alignleft"></div>
+                <div class="ico ico_dropdown"></div>
+            </div>
+            <div class="toolbar_devider"></div>
+
+            <!-- Style -->
+            <div id="bar_fill" title='填充样式' class="toolbar_button drop_button">
+                <div class="ico fillcolor"></div>
+                <div class="btn_color" style="background-color: rgb(255,255,255)"></div>
+                <div class="ico ico_dropdown"></div>
+            </div>
+            <div id="bar_line_color" title='线条颜色' class="toolbar_button drop_button">
+                <div class="ico linecolor"></div>
+                <div class="btn_color" style="background-color: rgb(50,50,50)"></div>
+                <div class="ico ico_dropdown"></div>
+            </div>
+            <div id="bar_line_width" title='线宽' class="toolbar_button drop_button">
+                <div class="ico linewidth"></div>
+                <div class="ico ico_dropdown"></div>
+            </div>
+            <div id="bar_line_style" title='线条样式' class="toolbar_button drop_button">
+                <div class="ico linedash"></div>
+                <div class="ico ico_dropdown"></div>
+            </div>
+            <div class="toolbar_devider"></div>
+
+            <!-- Linker Style -->
+            <!-- <div id="bar_linkertype" title='连线类型' class="toolbar_button drop_button">
+			<div class="ico linkertype_broken"></div>
+			<div class="ico ico_dropdown"></div>
+		</div>
+		<div id="bar_beginarrow" title='起点' class="toolbar_button drop_button">
+			<div class="ico ico_arrow larrow_none"></div>
+			<div class="ico ico_dropdown"></div>
+		</div>
+		<div id="bar_endarrow" title='终点' class="toolbar_button drop_button">
+			<div class="ico ico_arrow rarrow_none"></div>
+			<div class="ico ico_dropdown"></div>
+		</div> 
+		<div class="toolbar_devider"></div>-->
+            <div id="bar_front" title='置于顶层 (Ctrl+] )' class="toolbar_button">
+                <div class="ico ico_front"></div>
+            </div>
+            <div id="bar_back" title='置于底层 (Ctrl+[ )' class="toolbar_button">
+                <div class="ico ico_back"></div>
+            </div>
+            <div class="toolbar_devider"></div>
+            <div id="bar_lock" title='锁定 (Ctrl+L)' class="toolbar_button">
+                <div class="ico ico_lock"></div>
+            </div>
+            <div id="bar_unlock" title='解锁 (Ctrl+Shift+L)' class="toolbar_button">
+                <div class="ico ico_unlock"></div>
+            </div>
+            <div class="toolbar_small_devider"></div>
+            <div id="bar_link" title='插入链接' class="toolbar_button">
+                <div class="ico ico_link"></div>
+            </div>
+            <div class="toolbar_right">
+                <div class="dock_buttons">
+                    <div id="dock_btn_navigator" title="导航" disableTitle="true" class="toolbar_button" onclick="Dock.showView('navigator', true)">
+                        <div class="ico ico_dock_nav"></div>
+                    </div>
+                    <div id="dock_btn_general" title="通用" disableTitle="true" class="toolbar_button" onclick="Dock.showView('general', true)">
+                        <div class="ico ico_dock_general"></div>
+                    </div>
+                    <div id="dock_btn_graphic" title="图形" disableTitle="true" class="toolbar_button" onclick="Dock.showView('graphic', true)">
+                        <div class="ico ico_dock_styles"></div>
+                    </div>
+                    <div id="dock_btn_metric" title="度量" disableTitle="true" class="toolbar_button" onclick="Dock.showView('metric', true)">
+                        <div class="ico ico_dock_metric"></div>
+                    </div>
+                    <div id="dock_btn_events" title="事件动作" disableTitle="true" class="toolbar_button" onclick="Dock.showView('events', true)">
+                        <div class="ico ico_dock_events"></div>
+                    </div>
+                    <div id="dock_btn_animation" title="动画关联" disableTitle="true" class="toolbar_button" onclick="Dock.showView('animation', true)">
+                        <div class="ico ico_dock_animation" style="background-position: 2px -643px;"></div>
+                    </div>
+                    <div id="dock_btn_attribute" title="数据属性" disableTitle="true" class="toolbar_button" onclick="Dock.showAdvConfig()">
+                        <div class="ico ico_dock_attribute"></div>
+                    </div>
+                    <div id="dock_btn_page" title="页面设置" disableTitle="true" class="toolbar_button" onclick="Dock.showView('page', true)">
+                        <div class="ico ico_dock_page"></div>
+                    </div>
+                </div>
+                <div id="bar_collapse" class="toolbar_button">
+                    <div class="ico collapse"></div>
+                </div>
+            </div>
+            <div id="btn_drawpanel_toggle" class="toolbar_button" title='对象面板' onclick="Dock.toggleDrawPanel()">
+                <span class="ico ico_goback"></span>
+            </div>
+        </div>
+    </div>
+    <div id="designer">
+        <div id="shape_panel" class="layout">
+            <div class="panel_container">
+                <h3 class="panel_title">
+                    <div class="ico ico_accordion"></div>基础图形</h3>
+                <div id="panel_basic" class="content">
+                    <div class="panel_box" shapetype="vline">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="hline">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="text" style="left: 0px; top: 0px;">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="round" style="left: 0px; top: 0px;">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="rectangle" style="left: 0px; top: 0px;">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="roundRectangle">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="triangle">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="diamond">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="pentagon">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="hexagon">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="octagon" style="left: 0px; top: 0px;">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="cross">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="singleLeftArrow">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="singleRightArrow">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="doubleHorizontalArrow">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="singleUpArrow">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="singleDownArrow">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                    <div class="panel_box" shapetype="doubleVerticalArrow">
+                        <canvas class="panel_item" width="30" height="30"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="designer_viewport">
+            <div id="designer_layout" class="layout">
+                <div id="canvas_container">
+                    <div id="designer_canvas">
+                        <canvas id="designer_grids"></canvas>
+                        <ul id="designer_contextmenu" class="menu list options_menu">
+                            <li ac="cut">
+                                <div class="ico cut"></div>剪切
+                                <div class="extend">Ctrl+X</div>
+                            </li>
+                            <li ac="copy">
+                                <div class="ico copy"></div>复制
+                                <div class="extend">Ctrl+C</div>
+                            </li>
+                            <li ac="paste">
+                                <div class="ico paste"></div>粘贴
+                                <div class="extend">Ctrl+V</div>
+                            </li>
+                            <li ac="duplicate">复用
+                                <div class="extend">Ctrl+D</div>
+                            </li>
+                            <li class="devider devi_clip"></li>
+                            <li ac="front">
+                                <div class="ico ico_front"></div>置于顶层
+                                <div class="extend">Ctrl+]</div>
+                            </li>
+                            <li ac="back">
+                                <div class="ico ico_back"></div>置于底层
+                                <div class="extend">Ctrl+[</div>
+                            </li>
+                            <li ac="lock">
+                                <div class="ico ico_lock"></div>锁定
+                                <div class="extend">Ctrl+L</div>
+                            </li>
+                            <li ac="unlock">
+                                <div class="ico ico_unlock"></div>解锁
+                                <div class="extend">Ctrl+Shift+L</div>
+                            </li>
+                            <li ac="group">组合
+                                <div class="extend">Ctrl+G</div>
+                            </li>
+                            <li ac="ungroup">取消组合
+                                <div class="extend">Ctrl+Shift+G</div>
+                            </li>
+                            <li id="ctxmenu_align">
+                                图形对齐
+                                <div class="extend ex_arrow">►</div>
+                                <ul class="menu list extend_menu">
+                                    <li ac="align_shape" al="left">左对齐</li>
+                                    <li ac="align_shape" al="center">居中对齐</li>
+                                    <li ac="align_shape" al="right">右对齐</li>
+                                    <li class="devider"></li>
+                                    <li ac="align_shape" al="top">顶端对齐</li>
+                                    <li ac="align_shape" al="middle">垂直居中对齐</li>
+                                    <li ac="align_shape" al="bottom">底端对齐</li>
+                                </ul>
+                            </li>
+                            <li class="devider devi_shape"></li>
+                            <li ac="changelink">
+                                <div class="ico ico_link"></div>修改链接</li>
+                            <li ac="edit">
+                                <div class="ico edittext"></div>编辑文本
+                                <div class="extend">空格</div>
+                            </li>
+                            <li ac="delete">
+                                <div class="ico remove"></div>删除
+                                <div class="extend">Delete/Backspace</div>
+                            </li>
+                            <li class="devider devi_del"></li>
+                            <li ac="selectall">全选
+                                <div class="extend">Ctrl+A</div>
+                            </li>
+                            <li class="devider devi_selectall"></li>
+                            <li ac="drawline">
+                                <div class="ico linkertype_normal"></div>创建连线
+                                <div class="extend">L</div>
+                            </li>
+                            <li class="devider devi_codeEdit"></li>
+                            <li ac="scripteditor">
+                                <div class="ico scripteditor" style="background-position: -20px -643px;"></div>脚本编辑...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="groupbutton">
+                                <div class="ico groupbutton" style="background-position: -20px -643px;"></div>组按钮配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="timer">
+                                <div class="ico timer" style="background-position: -20px -643px;"></div>定时器配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="tree">
+                                <div class="ico tree" style="background-position: -20px -643px;"></div>树配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="realalarmlist">
+                                <div class="ico realalarmlist" style="background-position: -20px -643px;"></div>实时报警配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="grid">
+                                <div class="ico grid" style="background-position: -20px -643px;"></div>通用表格配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="trendchart">
+                                <div class="ico trendchart" style="background-position: -20px -643px;"></div>趋势配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="loglist">
+                                <div class="ico loglist" style="background-position: -20px -643px;"></div>日志配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="datetimepicker">
+                                <div class="ico pkDT" style="background-position: -20px -643px;"></div>日期时间配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="datepicker">
+                                <div class="ico pkD" style="background-position: -20px -643px;"></div>日期配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="timepicker">
+                                <div class="ico pkT" style="background-position: -20px -643px;"></div>时间配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="histrendchart">
+                                <div class="ico trendChartHis" style="background-position: -20px -643px;"></div>历史趋势配置
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="radiobox">
+                                <div class="ico radiobox" style="background-position: -20px -643px;"></div>单选按钮配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="checkbox">
+                                <div class="ico checkbox" style="background-position: -20px -643px;"></div>多选按钮配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="pkpie">
+                                <div class="ico checkbox" style="background-position: -20px -643px;"></div>饼图配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="pktrendLine">
+                                <div class="ico checkbox" style="background-position: -20px -643px;"></div>折线报表配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="pkchartladar">
+                                <div class="ico checkbox" style="background-position: -20px -643px;"></div>雷达图配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="pkslider">
+                                <div class="ico checkbox" style="background-position: -20px -643px;"></div>slider配置...
+                                <div class="extend"></div>
+                            </li>
+                            <li ac="pkimage2">
+                                <div class="ico checkbox" style="background-position: -20px -643px;"></div>pkimage2配置...
+                                <div class="extend"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="shape_img_container"></div>
+                <div id="layout_block"></div>
+            </div>
+            <div id="shape_thumb" class="menu">
+                <canvas width="160px"></canvas>
+                <div></div>
+            </div>
+            <div id="dock">
+                <div class="dock_header"></div>
+                <div class="dock_buttons">
+                    <div id="dock_btn_navigator" title="导航" disableTitle="true" class="toolbar_button" onclick="Dock.showView('navigator', true)">
+                        <div class="ico ico_dock_nav"></div>
+                    </div>
+                    <div id="dock_btn_general" title="通用" disableTitle="true" class="toolbar_button" onclick="Dock.showView('general', true)">
+                        <div class="ico ico_dock_attribute"></div>
+                    </div>
+                    <div id="dock_btn_graphic" title="图形" disableTitle="true" class="toolbar_button" onclick="Dock.showView('graphic', true)">
+                        <div class="ico ico_dock_styles"></div>
+                    </div>
+                    <div id="dock_btn_metric" title="度量" disableTitle="true" class="toolbar_button" onclick="Dock.showView('metric', true)">
+                        <div class="ico ico_dock_metric"></div>
+                    </div>
+                    <div id="dock_btn_events" title="事件动作" disableTitle="true" class="toolbar_button" onclick="Dock.showView('events', true)">
+                        <div class="ico ico_dock_events"></div>
+                    </div>
+                    <div id="dock_btn_animation" title="动画关联" disableTitle="true" class="toolbar_button" onclick="Dock.showView('animation', true)">
+                        <div class="ico ico_dock_events" style="background-position: 2px -643px;"></div>
+                    </div>
+                    <div id="dock_btn_attribute" title="数据属性" disableTitle="true" class="toolbar_button" onclick="Dock.showAdvConfig()">
+                        <div class="ico ico_dock_attribute"></div>
+                    </div>
+                    <div id="dock_btn_page" title="页面设置" disableTitle="true" class="toolbar_button" onclick="Dock.showView('page', true)">
+                        <div class="ico ico_dock_page"></div>
+                    </div>
+                </div>
+            </div>
+            <!--导航-->
+            <div id="navigation_view" class="dock_view dock_view_navigator">
+                <div class="dock_view_header">
+                    导航
+                    <div class="ico ico_dock_collapse"></div>
+                </div>
+                <div class="navigation_bounding">
+                    <div class="navigation_view_container">
+                        <canvas id="navigation_canvas" width="120px" height="160px"></canvas>
+                        <div id="navigation_eye"></div>
+                    </div>
+                </div>
+                <div class="dock_devider" style="margin: 0px 10px"></div>
+                <div class="navigation_view_bar">
+                    缩放：
+                    <div id="dock_zoom" class="spinner active"></div>
+                    <div class="toolbar_button active" onclick="Dock.enterFullScreen()" title='全屏视图 (F11)'>
+                        <div class="ico ico_fullscreen"></div>
+                    </div>
+                    <!-- <div class="toolbar_button active" onclick="Dock.enterPresentation()" title='演示视图 (F10)'><div class="ico ico_presentation"></div> </div> -->
+                </div>
+                <div id="fullscreen_tip" class="alert error">
+                    <div class="ico dlg_close" onclick="jQuery('#fullscreen_tip').hide();"></div>
+                    <div class="t"></div>
+                    <div class="full_suggest">
+                        <span>我们推荐使用以下浏览器：</span>
+                        <a href="http://www.google.com/chrome" target="_blank">
+                            <span class="ico chrome"></span>
+                        </a>
+                        <a href="http://www.firefox.com" target="_blank">
+                            <span class="ico firefox"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- 通用属性 Dock Window -->
+            <div class="dock_view dock_view_general">
+                <div class="dock_view_header">
+                    通用
+                    <div class="ico ico_dock_collapse"></div>
+                </div>
+                <div class="dock_content" style="padding: 5px 0px 5px;">
+                    <div class="attr_add2">
+                        <div class="attr_add_items2">
+                            <div class="dock_label" style="width: 50px;">名字:</div>
+                            <input id="dock_general_name" type="text" class="input_text" style="float: left;width: 120px; " />
+                            <div style="height: 5px; clear: both"></div>
+                            <div class="dock_label" style="width: 50px;">类型:</div>
+                            <input id="dock_general_type" type="text" class="input_text" style="float: left;width: 120px;" />
+                            <div style="height: 5px; clear: both"></div>
+                            <div class="dock_devider"></div>
+                            <div class="dock_label" style="width: 132px;">提示信息背景颜色：</div>
+                            <div id="dock_tip_background_color" class="picker_btn btn_inline"></div>
+                            <div style="height: 5px; clear: both"></div>
+                            <div class="dock_label" style="width: 132px;">提示信息面板宽度：</div>
+                            <input id="dock_tip_width" type="text" class="input_text" style="float: left;width: 35px; " />
+                            <div style="height: 5px; clear: both"></div>
+                            <div class="dock_label" style="width: 80px;">提示信息：</div>
+                            <textarea rows="4" id="dock_general_tip" style="margin-left: 20px;"></textarea>
+                            <div style="height: 5px; clear: both"></div>
+                            <!-- <div class="toolbar_button active" style="width: 70px;display: inline-block;" onclick="">确定</div>
+						<div class="toolbar_button active" style="width: 70px;display: inline-block;" onclick="">取消</div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graphic图形 Dock Window -->
+            <div class="dock_view dock_view_graphic">
+                <div class="dock_view_header">
+                    图形
+                    <div class="ico ico_dock_collapse"></div>
+                </div>
+                <div class="dock_content">
+                    <div class="dock_content_title">连线</div>
+                    <div id="dock_line_color" class="picker_btn btn_inline"></div>
+                    <div id="dock_line_style" class="toolbar_button drop_button active btn_inline" style="margin: 0px 0px 0px 10px">
+                        <div class="ico linestyle linesolid"></div>
+                        <div class="ico ico_dropdown"></div>
+                    </div>
+                    <div id="dock_line_width" class="spinner active btn_inline" style="width: 82px; margin-left: 10px;"></div>
+                    <div style="clear: both"></div>
+                    <div class="dock_devider"></div>
+                    <div class="dock_content_title">填充样式</div>
+                    <div id="dock_fill_type" class="toolbar_button active">
+                        <div class="text_content"></div>
+                        <div class="ico ico_dropdown"></div>
+                    </div>
+                    <div class="fill_detail fill_detail_solid">
+                        <div id="fill_solid_btn" class="picker_btn"></div>
+                    </div>
+                    <div class="fill_detail fill_detail_gradient">
+                        <div id="fill_gradient_begin" c="255,255,255" class="picker_btn btn_inline"></div>
+                        <div id="gradient_swap" class="toolbar_button btn_normal btn_inline">
+                            <div class="ico gradient_swap"></div>
+                        </div>
+                        <div id="fill_gradient_end" c="255,255,255" class="picker_btn btn_inline"></div>
+                        <div id="gradient_type" class="toolbar_button active btn_normal btn_inline" style="width: 100px;margin: 0px 0px 0px 10px;">
+                            <div class="text_content"></div>
+                            <div class="ico ico_dropdown"></div>
+                        </div>
+                        <div style="clear: both"></div>
+                        <div id="gradient_type_linear" class="gradient_details">
+                            角度：
+                            <div id="gradient_angle" class="spinner active" style="width: 100px; display: inline-block;"></div>
+                        </div>
+                        <div id="gradient_type_radial" class="gradient_details">
+                            半径：
+                            <div id="gradient_radius" class="spinner active" style="width: 100px; display: inline-block;"></div>
+                        </div>
+                        <div style="clear: both"></div>
+                    </div>
+                    <div class="fill_detail fill_detail_image">
+                        <div id="fill_change_img" class="toolbar_button active" style="width: 95px;">更改图片</div>
+                        <div style="height: 10px;"></div>
+                        显示方式：
+                        <div id="fill_img_display" class="toolbar_button active" style="width: 100px; display: inline-block;">
+                            <div class="text_content"></div>
+                            <div class="ico ico_dropdown"></div>
+                        </div>
+                    </div>
+                    <div class="dock_devider"></div>
+                    <div class="dock_content_title">光标设置</div>
+                    <div id="dock_cursor_type" class="toolbar_button active " style="width: 90px;">
+                        <div class="text_content"></div>
+                        <div class="ico ico_dropdown"></div>
+                    </div>
+                    <div class="dock_devider"></div>
+                    <div class="dock_content_title">透明度</div>
+                    <div id="spinner_opacity" class="spinner active" style="width: 90px;"></div>
+                    <div class="dock_devider"></div>
+                    <div id="dock_isvisible" class="toolbar_button active" style="  margin-top: 10px;">
+                        <input type="checkbox" checked="" id="isVisible_run">显示</div>
+                </div>
+            </div>
+            <!--度量-->
+            <div class="dock_view dock_view_metric">
+                <div class="dock_view_header">
+                    度量
+                    <div class="ico ico_dock_collapse"></div>
+                </div>
+                <div class="dock_content">
+                    <div class="dock_content_title">位置和大小</div>
+                    <div class="dock_label">X:</div>
+                    <div id="dock_metric_x" class="spinner active btn_inline" style="width: 65px;"></div>
+                    <div class="dock_label">宽:</div>
+                    <div id="dock_metric_w" class="spinner active btn_inline" style="width: 65px;"></div>
+                    <div style="clear: both; height: 10px;"></div>
+                    <div class="dock_label">Y:</div>
+                    <div id="dock_metric_y" class="spinner active btn_inline" style="width: 65px;"></div>
+                    <div class="dock_label">高:</div>
+                    <div id="dock_metric_h" class="spinner active btn_inline" style="width: 65px;"></div>
+                    <div style="clear: both"></div>
+                    <div class="dock_devider"></div>
+                    <div class="dock_content_title">旋转方向</div>
+                    <div id="dock_metric_angle" class="spinner active" style="width: 95px; display: inline-block;"></div>
+                </div>
+            </div>
+            <!--页面设置-->
+            <div class="dock_view dock_view_page">
+                <div class="dock_view_header">
+                    页面设置
+                    <div class="ico ico_dock_collapse"></div>
+                </div>
+                <div class="dock_content">
+                    <div class="dock_content_title">页面</div>
+                    <div class="dock_label" style="width: 80px;">画面自适应:</div>
+                    <div id="dock_page_fitmode" class="toolbar_button active btn_inline" style="width: 110px;display: inline-block;">
+                        <div class="text_content"></div>
+                        <div class="ico ico_dropdown"></div>
+                    </div>
+                    <div style="height: 10px; clear: both"></div>
+                    <div class="dock_label" style="width: 80px;">页面大小:</div>
+                    <div id="dock_page_size" class="toolbar_button active btn_inline" style="width: 110px;display: inline-block;">
+                        <div class="text_content"></div>
+                        <div class="ico ico_dropdown"></div>
+                    </div>
+                    <div style="height: 10px; clear: both"></div>
+                    <!--<div class="dock_label" style="width: 80px;">内边距:</div>
+				<div id="dock_page_padding" class="toolbar_button active btn_inline" style="width: 110px;display: inline-block;"><div class="text_content"></div><div class="ico ico_dropdown"></div></div>-->
+                    <div style="height: 10px; clear: both"></div>
+                    <div class="dock_label" style="width: 80px;">背景颜色:</div>
+                    <div id="dock_page_color" class="picker_btn btn_inline"></div>
+
+                    <div style="clear: both"></div>
+
+                </div>
+            </div>
+
+            <script>
+            // $("#go-text-colorButton").kendoButton();
+            // $("#animation_add_btn").kendoButton();
+            </script>
+            <!--事件属性-->
+            <div class="dock_view dock_view_events" style="width: 350px">
+                <div class="dock_view_header">
+                    事件动作
+                    <div class="ico ico_dock_collapse"></div>
+                </div>
+                <div class="dock_content" style="padding: 5px 0px 5px;">
+                    <div class="event_add">
+                        <div id="event_add_btn" class="toolbar_button active noover" style="width: 120px;display: inline-block;" onclick="DockAA.showEventAdd()">添加事件动作</div>
+                        <!--增加或修改的要事件及处理方法-->
+                        <div class="event_add_items">
+                            <input id="event_id" type="hidden" />
+                            <div class="dock_label" style="width: 60px;">事件:</div>
+                            <select id="event_type" class="input_select" style="float: left; width: 120px;">
+                                <option value="click">单击事件</option>
+                                <option value="dbclick">双击事件</option>
+                                <option value="onTime">定时时间(仅支持定制控制)</option>
+                                <option value="rclick">右键单击事件</option>
+                            </select>
+                            <div style="height: 5px; clear: both"></div>
+                            <div class="dock_label" style="width: 60px;">动作:</div>
+                            <select id="action_type" class="input_select" style="float: left; width: 120px;">
+                                <option value="openpage">在子窗体打开画面</option>
+                                <option value="switchtopage">切换画面</option>
+                                <option value="poppage">在弹出框打开画面</option>
+                                <option value="switchtourl">切换到url链接</option>
+                                <option value="openurl">在子窗体打开url链接</option>
+                                <option value="popurl">在弹出框打开url链接</option>
+                                <option value="closedialog">关闭对话框</option>
+                                <option value="control">控制变量</option>
+                                <option value="confirmalarm">确认报警</option>
+                                <option value="login">登录系统</option>
+                                <option value="logout">注销</option>
+                                <option value="exitsys">退出系统</option>
+                            </select>
+                            <div style="height: 5px; clear: both"></div>
+                            <div id="opendialog_tabs" class="dock_label opendialog_tabs opendialog_tabs_pageparamtype" style="width: 60px;">附加动作:</div>
+                            <div id="opendialog_tabs_control" class="dock_label opendialog_tabs opendialog_tabs_control" style="width: 60px;">控制方式:</div>
+                            <div class="opendialog_tabs opendialog_tabs_content">
+                                <!-- 弹窗打开方式 -->
+                                <div class="opendialog_tabs opendialog_tabs_pageparamtype">
+                                    <input name="page_param_type" type="radio" class="opendialog_tabs_pageparamtype opendialog_tabs opendialog_tabs_pageparamtype_none"
+                                        value="none" checked="checked" />无参数
+                                    <input name="page_param_type" type="radio" class="opendialog_tabs_pageparamtype opendialog_tabs opendialog_tabs_pageparamtype_onLoad "
+                                        value="onLoad" />onLoad参数
+                                    <input name="page_param_type" type="radio" class="opendialog_tabs_pageparamtype opendialog_tabs opendialog_tabs_pageparamtype_objectreplace "
+                                        value="objectreplace" />对象名称替换
+                                    <input name="page_param_type" type="radio" class="opendialog_tabs_pageparamtype opendialog_tabs opendialog_tabs_pageparamtype_openvideo "
+                                        value="switchcamera" />视频切换
+                                </div>
+                                <!-- 变量控制类型 -->
+                                <div class="opendialog_tabs opendialog_tabs_control">
+                                    <input name="opd_type" type="radio" checked="checked" class="opendialog_tabs_control opendialog_tabs_control_fixed tab_type"
+                                        value="fixed" />定值控制
+                                    <input name="opd_type" type="radio" class="opendialog_tabs_control opendialog_tabs_control_switch tab_type " value="switch"
+                                    />切换控制
+                                    <input name="opd_type" type="radio" class="opendialog_tabs_control opendialog_tabs_control_range tab_type " value="range"
+                                    />范围控制
+                                </div>
+                            </div>
+                            <div style="height: 5px; clear: both"></div>
+                            <div id="action_param1_label" class="dock_label" style="width: 60px;">参数1:</div>
+                            <input id="action_param1" type="text" class="input_text" style="float: left; width: 260px;" />
+
+                            <div id="action_param2_label" class="dock_label" style="width: 60px;">参数2:</div>
+                            <input id="action_param2" type="text" class="input_text" style="float: left; width: 260px;" />
+                            <input id="view_control_name" type="checkbox" class="input_text" style="float: right;" checked title="勾选时表示控制在显示点上" />
+                            <div id="action_param3_label" class="dock_label" style="width: 60px;">参数3:</div>
+                            <input id="action_param3" type="text" class="input_text" style="float: left; width: 260px;" />
+                            <div id="action_param4_label" class="dock_label" style="width: 60px;">参数4:</div>
+                            <input id="action_param4" type="text" class="input_text" style="float: left; width: 260px;" />
+                            <div id="action_param5_label" class="dock_label" style="width: 60px;">onLoad参数1</div>
+                            <input id="action_param5" type="text" class="input_text" style="float: left; width: 260px;" />
+                            <div id="action_param6_label" class="dock_label" style="width: 60px;">onLoad参数2</div>
+                            <input id="action_param6" type="text" class="input_text" style="float: left; width: 260px;" />
+                            <div id="action_param7_label" class="dock_label" style="width: 60px;">onLoad参数3</div>
+                            <input id="action_param7" type="text" class="input_text" style="float: left; width: 260px;" />
+                            <div id="action_param8_label" class="dock_label" style="width: 60px;">onLoad参数4</div>
+                            <input id="action_param8" type="text" class="input_text" style="float: left; width: 260px;" />
+
+                            <div style="height: 5px; clear: both"></div>
+
+                            <div class="toolbar_button active" style="width: 70px;display: inline-block;" onclick="DockAA.saveEventAdd()">确定</div>
+                            <div class="toolbar_button active" style="width: 70px;display: inline-block;" onclick="DockAA.cancelEventAdd()">取消</div>
+                        </div>
+                        <div class="dock_devider"></div>
+                    </div>
+                    <!--显示已有的事件关联列表-->
+                    <ul class="event_list">
+                    </ul>
+                </div>
+            </div>
+            <!--历史版本-->
+            <div class="dock_view dock_view_history">
+                <div class="dock_view_header">
+                    历史版本
+                    <div class="ico ico_dock_collapse"></div>
+                </div>
+                <div class="dock_content" style="padding: 0px;">
+                    <div class="history_bar">
+                        <div class="area_history">
+                            <div id="btn_history_add" class="toolbar_button active" style="padding: 0px 10px 0px 3px">
+                                <div class="ico ico_plus" style="float: left;"></div>创建历史版本</div>
+                            <div id="btn_history_restore" class="toolbar_button active disabled" title='恢复到此版本'>
+                                <div class="ico ico_restore"></div>
+                            </div>
+                        </div>
+                        <div id="area_history_add" class="area_history">
+                            <textarea id="history_remark" class="input_text" placeholder='填写注释...' style="width: 188px; height: 36px; margin-bottom: 5px;"></textarea>
+                            <div class="toolbar_button active" style="width: 70px;display: inline-block;" onclick="Dock.addHistory()">确定</div>
+                            <div class="toolbar_button active" style="width: 70px;display: inline-block;" onclick="Dock.toggleAddHistory()">取消</div>
+                        </div>
+                    </div>
+                    <div class="dock_devider"></div>
+                    <div id="history_container" style="min-height: 120px;"></div>
+                </div>
+            </div>
+            <!--评论-->
+            <div class="dock_view dock_view_comment" style="width: 300px;">
+                <div class="dock_view_header">
+                    评论
+                    <div class="ico ico_dock_collapse"></div>
+                </div>
+                <div class="dock_content" style="padding: 0px;">
+                    <div id="comment_container" style="min-height: 120px;">
+                    </div>
+                    <div class="comment_bar">
+                        <div>
+                            <textarea id="txt_sub_comment" class="input_text" placeholder="发表评论" style="width: 268px; height: 36px"></textarea>
+                        </div>
+                        <div class="comment_control">
+                            <input type="checkbox" id="show_comment_ico" />
+                            <label for="show_comment_ico">显示评论图标</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="designer_footer">
+        <div class="footer_content">
+            <div class="left_box">
+                <div class="designer_button" onclick="UI.showShapesManage()">更多图形</div>
+            </div>
+            <div class="content_box">
+                <div class="footer_left">
+                    <div id="open_chat_btn" class="toolbar_button active" onclick="CLB.showChatWin()">
+                        <div class="ico ico_chat" style="float: left;"></div>聊天
+                        <div id="chat_prompt">0</div>
+                    </div>
+
+                    <div class="footer_devider"></div>
+                    <div id="collaborators">
+                        <img id="chat_user_54c1a195e4b0c7bde4eba976" src="<%=basePath%>/static/images/default/default/profile-full-male.png" title="shijunpu"
+                            title_pos="top" />
+                    </div>
+                    <div class="toolbar_button" onclick="UI.showAddColla()">
+                        <div class="ico useradd" style="float: left;"></div>&nbsp;
+                        <b>邀请协作者</b>
+                    </div>
+                </div>
+                <ul class="footer_right">
+                    <li>
+                        <a href="/support" target="_blank">帮助中心</a>
+                    </li>
+                    <li class="footer_fb" onclick="UI.showFeedBack()">提交反馈</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="ui_container">
+        <div id='color_picker' class="menu color_picker" style="display: none;">
+            <div class="color_items">
+                <div style="background-color:rgb(255,255,255);"></div>
+                <div style="background-color:rgb(229,229,229);"></div>
+                <div style="background-color:rgb(207,207,207);"></div>
+                <div style="background-color:rgb(184,184,184);"></div>
+                <div style="background-color:rgb(161,161,161);"></div>
+                <div style="background-color:rgb(138,138,138);"></div>
+                <div style="background-color:rgb(115,115,115);"></div>
+                <div style="background-color:rgb(92,92,92);"></div>
+                <div style="background-color:rgb(69,69,69);"></div>
+                <div style="background-color:rgb(50,50,50);"></div>
+                <div style="background-color:rgb(23,23,23);"></div>
+                <div style="background-color:rgb(0,0,0);"></div>
+                <div class="clear"></div>
+            </div>
+            <div class="color_items">
+                <div style="background-color:rgb(255,204,204);"></div>
+                <div style="background-color:rgb(255,230,204);"></div>
+                <div style="background-color:rgb(255,255,204);"></div>
+                <div style="background-color:rgb(230,255,204);"></div>
+                <div style="background-color:rgb(204,255,204);"></div>
+                <div style="background-color:rgb(204,255,230);"></div>
+                <div style="background-color:rgb(204,255,255);"></div>
+                <div style="background-color:rgb(204,229,255);"></div>
+                <div style="background-color:rgb(204,204,255);"></div>
+                <div style="background-color:rgb(229,204,255);"></div>
+                <div style="background-color:rgb(255,204,255);"></div>
+                <div style="background-color:rgb(255,204,230);"></div>
+                <div style="background-color:rgb(255,153,153);"></div>
+                <div style="background-color:rgb(255,204,153);"></div>
+                <div style="background-color:rgb(255,255,153);"></div>
+                <div style="background-color:rgb(204,255,153);"></div>
+                <div style="background-color:rgb(153,255,153);"></div>
+                <div style="background-color:rgb(153,255,204);"></div>
+                <div style="background-color:rgb(153,255,255);"></div>
+                <div style="background-color:rgb(153,204,255);"></div>
+                <div style="background-color:rgb(153,153,255);"></div>
+                <div style="background-color:rgb(204,153,255);"></div>
+                <div style="background-color:rgb(255,153,255);"></div>
+                <div style="background-color:rgb(255,153,204);"></div>
+                <div style="background-color:rgb(255,102,102);"></div>
+                <div style="background-color:rgb(255,179,102);"></div>
+                <div style="background-color:rgb(255,255,102);"></div>
+                <div style="background-color:rgb(179,255,102);"></div>
+                <div style="background-color:rgb(102,255,102);"></div>
+                <div style="background-color:rgb(102,255,179);"></div>
+                <div style="background-color:rgb(102,255,255);"></div>
+                <div style="background-color:rgb(102,178,255);"></div>
+                <div style="background-color:rgb(102,102,255);"></div>
+                <div style="background-color:rgb(178,102,255);"></div>
+                <div style="background-color:rgb(255,102,255);"></div>
+                <div style="background-color:rgb(255,102,179);"></div>
+                <div style="background-color:rgb(255,51,51);"></div>
+                <div style="background-color:rgb(255,153,51);"></div>
+                <div style="background-color:rgb(255,255,51);"></div>
+                <div style="background-color:rgb(153,255,51);"></div>
+                <div style="background-color:rgb(51,255,51);"></div>
+                <div style="background-color:rgb(51,255,153);"></div>
+                <div style="background-color:rgb(51,255,255);"></div>
+                <div style="background-color:rgb(51,153,255);"></div>
+                <div style="background-color:rgb(51,51,255);"></div>
+                <div style="background-color:rgb(153,51,255);"></div>
+                <div style="background-color:rgb(255,51,255);"></div>
+                <div style="background-color:rgb(255,51,153);"></div>
+                <div style="background-color:rgb(255,0,0);"></div>
+                <div style="background-color:rgb(255,128,0);"></div>
+                <div style="background-color:rgb(255,255,0);"></div>
+                <div style="background-color:rgb(128,255,0);"></div>
+                <div style="background-color:rgb(0,255,0);"></div>
+                <div style="background-color:rgb(0,255,128);"></div>
+                <div style="background-color:rgb(0,255,255);"></div>
+                <div style="background-color:rgb(0,127,255);"></div>
+                <div style="background-color:rgb(0,0,255);"></div>
+                <div style="background-color:rgb(127,0,255);"></div>
+                <div style="background-color:rgb(255,0,255);"></div>
+                <div style="background-color:rgb(255,0,128);"></div>
+                <div style="background-color:rgb(204,0,0);"></div>
+                <div style="background-color:rgb(204,102,0);"></div>
+                <div style="background-color:rgb(204,204,0);"></div>
+                <div style="background-color:rgb(102,204,0);"></div>
+                <div style="background-color:rgb(0,204,0);"></div>
+                <div style="background-color:rgb(0,204,102);"></div>
+                <div style="background-color:rgb(0,204,204);"></div>
+                <div style="background-color:rgb(0,102,204);"></div>
+                <div style="background-color:rgb(0,0,204);"></div>
+                <div style="background-color:rgb(102,0,204);"></div>
+                <div style="background-color:rgb(204,0,204);"></div>
+                <div style="background-color:rgb(204,0,102);"></div>
+                <div style="background-color:rgb(153,0,0);"></div>
+                <div style="background-color:rgb(153,76,0);"></div>
+                <div style="background-color:rgb(153,153,0);"></div>
+                <div style="background-color:rgb(77,153,0);"></div>
+                <div style="background-color:rgb(0,153,0);"></div>
+                <div style="background-color:rgb(0,153,77);"></div>
+                <div style="background-color:rgb(0,153,153);"></div>
+                <div style="background-color:rgb(0,76,153);"></div>
+                <div style="background-color:rgb(0,0,153);"></div>
+                <div style="background-color:rgb(76,0,153);"></div>
+                <div style="background-color:rgb(153,0,153);"></div>
+                <div style="background-color:rgb(153,0,77);"></div>
+                <div style="background-color:rgb(102,0,0);"></div>
+                <div style="background-color:rgb(102,51,0);"></div>
+                <div style="background-color:rgb(102,102,0);"></div>
+                <div style="background-color:rgb(51,102,0);"></div>
+                <div style="background-color:rgb(0,102,0);"></div>
+                <div style="background-color:rgb(0,102,51);"></div>
+                <div style="background-color:rgb(0,102,102);"></div>
+                <div style="background-color:rgb(0,51,102);"></div>
+                <div style="background-color:rgb(0,0,102);"></div>
+                <div style="background-color:rgb(51,0,102);"></div>
+                <div style="background-color:rgb(102,0,102);"></div>
+                <div style="background-color:rgb(102,0,51);"></div>
+                <div style="background-color:rgb(51,0,0);"></div>
+                <div style="background-color:rgb(51,26,0);"></div>
+                <div style="background-color:rgb(51,51,0);"></div>
+                <div style="background-color:rgb(26,51,0);"></div>
+                <div style="background-color:rgb(0,51,0);"></div>
+                <div style="background-color:rgb(0,51,26);"></div>
+                <div style="background-color:rgb(0,51,51);"></div>
+                <div style="background-color:rgb(0,25,51);"></div>
+                <div style="background-color:rgb(0,0,51);"></div>
+                <div style="background-color:rgb(25,0,51);"></div>
+                <div style="background-color:rgb(51,0,51);"></div>
+                <div style="background-color:rgb(51,0,26);"></div>
+                <div class="clear"></div>
+            </div>
+            <div title="透明" class="ico transparent color_transparent"></div>
+            <div class="color_hex">#
+                <input type="text" />
+            </div>
+            <div class="clear"></div>
+        </div>
+        <ul id="bar_list_file" class="menu list options_menu noico">
+            <!--
+		<li ac="new">新建</li>
+		<li ac="open">打开</li>-->
+
+            <li ac="view">预览</li>
+            <li class="devider"></li>
+
+            <li ac="save">保存</li>
+            <li ac="statistics">页面统计信息</li>
+            <!-- <li class="devider"></li>
+		<li ac="saveAs">另存...</li>
+		<li ac="export">下载为...</li>
+        <li ac="import">导入...</li> -->
+            <li class="devider"></li>
+            <li ac="close">关闭</li>
+        </ul>
+        <ul id="bar_list_edit" class="menu list options_menu">
+            <li ac="undo">
+                <div class="ico undo"></div>撤销
+                <div class="extend">Ctrl+Z</div>
+            </li>
+            <li ac="redo">
+                <div class="ico redo"></div>恢复
+                <div class="extend">Ctrl+Y</div>
+            </li>
+            <li class="devider"></li>
+            <li ac="cut">
+                <div class="ico cut"></div>剪切
+                <div class="extend">Ctrl+X</div>
+            </li>
+            <li ac="copy">
+                <div class="ico copy"></div>复制
+                <div class="extend">Ctrl+C</div>
+            </li>
+            <li ac="paste">
+                <div class="ico paste"></div>粘贴
+                <div class="extend">Ctrl+V</div>
+            </li>
+            <li ac="duplicate">
+                <div class="ico duplicate"></div>复用
+                <div class="extend">Ctrl+D</div>
+            </li>
+            <li ac="brush">
+                <div class="ico brush"></div>格式刷
+                <div class="extend">Ctrl+Shift+B</div>
+            </li>
+            <li class="devider"></li>
+            <li ac="selectall">
+                <div class="ico selectall"></div>全选
+                <div class="extend">Ctrl+A</div>
+            </li>
+            <li ac="delete">
+                <div class="ico remove"></div>删除
+                <div class="extend">Delete/Backspace</div>
+            </li>
+        </ul>
+        <ul id="bar_list_view" class="menu list options_menu">
+            <li ac="zoom" zoom="in">
+                <div class="ico zoomin"></div>放大
+                <div class="extend">Alt+(+)</div>
+            </li>
+            <li ac="zoom" zoom="out">
+                <div class="ico zoomout"></div>缩小
+                <div class="extend">Alt+(-)</div>
+            </li>
+            <li class="devider"></li>
+            <li ac="zoom" zoom="0.5" class="static">50%</li>
+            <li ac="zoom" zoom="0.75" class="static">75%</li>
+            <li ac="zoom" zoom="1" class="static">100%</li>
+            <li ac="zoom" zoom="1.5" class="static">150%</li>
+            <li ac="zoom" zoom="2" class="static">200%</li>
+            <li class="devider"></li>
+            <li ac="zoom" zoom="1">重置缩放</li>
+        </ul>
+        <ul id="bar_list_insert" class="menu list options_menu">
+            <li ac="insert" in="text">
+                <div class="ico text"></div>文本
+                <div class="extend">T</div>
+            </li>
+            <li ac="insert" in="image">
+                <div class="ico ico_img"></div>图片
+                <div class="extend">I</div>
+            </li>
+            <li ac="insert" in="line">
+                <div class="ico linkertype_normal"></div>连线
+                <div class="extend">L</div>
+            </li>
+        </ul>
+        <ul id="bar_list_page" class="menu list options_menu">
+            <li id="bar_page_color">
+                <div class="ico fillcolor"></div>
+                背景颜色
+                <div class="extend ex_arrow">►</div>
+            </li>
+            <li class="devider"></li>
+            <li ac="set_page_showgrid">
+                <div class="ico ico_selected"></div>显示网格</li>
+            <li>
+                <div class="ico gridsize"></div>
+                网格大小
+                <div class="extend ex_arrow">►</div>
+                <ul id="bar_list_gridsize" class="menu list extend_menu menu_ico">
+                    <li ac="set_page_gridsize" s="10">小</li>
+                    <li ac="set_page_gridsize" s="15">正常</li>
+                    <li ac="set_page_gridsize" s="20">大</li>
+                    <li ac="set_page_gridsize" s="30">很大</li>
+                </ul>
+            </li>
+        </ul>
+        <ul id="bar_list_arrange" class="menu list options_menu">
+            <li ac="front">
+                <div class="ico ico_front"></div>置于顶层
+                <div class="extend">Ctrl+]</div>
+            </li>
+            <li ac="back">
+                <div class="ico ico_back"></div>置于底层
+                <div class="extend">Ctrl+[</div>
+            </li>
+            <li ac="forward">
+                <div class="ico forward"></div>上移一层
+                <div class="extend">Ctrl+Shift+]</div>
+            </li>
+            <li ac="backward">
+                <div class="ico backward"></div>下移一层
+                <div class="extend">Ctrl+Shift+[</div>
+            </li>
+            <li class="devider"></li>
+            <li id="bar_arrange_align">
+                图形对齐
+                <div class="extend ex_arrow">►</div>
+                <ul class="menu list extend_menu">
+                    <li ac="align_shape" al="left">左对齐</li>
+                    <li ac="align_shape" al="center">居中对齐</li>
+                    <li ac="align_shape" al="right">右对齐</li>
+                    <li class="devider"></li>
+                    <li ac="align_shape" al="top">顶端对齐</li>
+                    <li ac="align_shape" al="middle">垂直居中对齐</li>
+                    <li ac="align_shape" al="bottom">底端对齐</li>
+                </ul>
+            </li>
+            <li id="bar_arrange_dist">
+                图形分布
+                <div class="extend ex_arrow">►</div>
+                <ul class="menu list extend_menu">
+                    <li ac="distribute_shape" dis="h">水平平均分布</li>
+                    <li ac="distribute_shape" dis="v">垂直平均分布</li>
+                </ul>
+            </li>
+            <li id="bar_arrange_match">
+                匹配大小
+                <div class="extend ex_arrow">►</div>
+                <ul class="menu list extend_menu">
+                    <li ac="match_size" w="auto" h="">宽度</li>
+                    <li ac="match_size" w="" h="auto">高度</li>
+                    <li ac="match_size" w="auto" h="auto">宽度和高度</li>
+                    <li ac="match_size" custom="true">自定义</li>
+                </ul>
+            </li>
+
+            <li ac="lock">
+                <div class="ico ico_lock"></div>锁定
+                <div class="extend">Ctrl+L</div>
+            </li>
+            <li ac="unlock">
+                <div class="ico ico_unlock"></div>解锁
+                <div class="extend">Ctrl+Shift+L</div>
+            </li>
+            <li class="devider">ji
+                <br>
+            </li>
+            <li ac="group">
+                <div class="ico group"></div>组合
+                <div class="extend">Ctrl+G</div>
+            </li>
+            <li ac="ungroup">
+                <div class="ico ungroup"></div>取消组合
+                <div class="extend">Ctrl+Shift+G</div>
+            </li>
+        </ul>
+        <ul id="bar_list_help" class="menu list options_menu noico">
+            <li ac="hotkey">快捷键列表</li>
+            <li ac="getting_started">开始向导</li>
+            <!-- <li ac="feedback">发送反馈</li> -->
+        </ul>
+        <ul id="font_list" class="menu list menu_ico" style="display: none;">
+            <li style="font-family: Arial">Arial</li>
+            <li style="font-family: Verdana">Verdana</li>
+            <li style="font-family: Georgia">Georgia</li>
+            <li style="font-family: Times New Roman">Times New Roman</li>
+            <li style="font-family: Courier New">Courier New</li>
+            <li style="font-family: Impact">Impact</li>
+            <li style="font-family: Comic Sans MS">Comic Sans MS</li>
+            <li style="font-family: Tahoma">Tahoma</li>
+            <li style="font-family: Garamond">Garamond</li>
+            <li style="font-family: Lucida Console">Lucida Console</li>
+
+            <li class="devider"></li>
+            <li style="font-family: 宋体">宋体</li>
+            <li style="font-family: 微软雅黑">微软雅黑</li>
+            <li style="font-family: 黑体">黑体</li>
+
+        </ul>
+        <ul id="font_size_list" class="menu list" style="display: none;">
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+            <li>11</li>
+            <li>12</li>
+            <li>14</li>
+            <li>18</li>
+            <li>24</li>
+            <li>30</li>
+            <li>36</li>
+            <li>48</li>
+            <li>60</li>
+            <li>72</li>
+        </ul>
+        <ul id="font_align_list" class="menu list" style="display: none;">
+            <li cate="textAlign" al="left">
+                <div class="ico alignleft"></div>
+            </li>
+            <li cate="textAlign" al="center">
+                <div class="ico aligncenter"></div>
+            </li>
+            <li cate="textAlign" al="right">
+                <div class="ico alignright"></div>
+            </li>
+            <li cate="vAlign" al="top">
+                <div class="ico aligntop"></div>
+            </li>
+            <li cate="vAlign" al="middle">
+                <div class="ico alignmiddle"></div>
+            </li>
+            <li cate="vAlign" al="bottom">
+                <div class="ico alignbottom"></div>
+            </li>
+        </ul>
+        <ul id="line_width_list" class="menu list menu_ico" style="display: none;">
+            <li>0px</li>
+            <li>1px</li>
+            <li>2px</li>
+            <li>3px</li>
+            <li>4px</li>
+            <li>5px</li>
+            <li>6px</li>
+            <li>8px</li>
+            <li>10px</li>
+        </ul>
+        <ul id="line_style_list" class="menu list menu_ico" style="display: none;">
+            <li line="solid">
+                <div class="ico linestyle linesolid"></div>
+            </li>
+            <li line="dashed">
+                <div class="ico linestyle linedashed"></div>
+            </li>
+            <li line="dot">
+                <div class="ico linestyle linedot"></div>
+            </li>
+            <li line="dashdot">
+                <div class="ico linestyle linedashdot"></div>
+            </li>
+        </ul>
+        <ul id="line_type_list" class="menu list" style="display: none;">
+            <li tp="broken">
+                <div class="ico linkertype_broken"></div>
+            </li>
+            <li tp="curve">
+                <div class="ico linkertype_curve"></div>
+            </li>
+            <li tp="normal">
+                <div class="ico linkertype_normal"></div>
+            </li>
+        </ul>
+        <ul id="beginarrow_list" class="menu list menu_ico" style="display: none;">
+            <li arrow="none">
+                <div class="ico ico_arrow larrow_none"></div>
+            </li>
+            <li arrow="solidArrow">
+                <div class="ico ico_arrow larrow_solidarrow"></div>
+            </li>
+            <li arrow="dashedArrow">
+                <div class="ico ico_arrow larrow_dashedarrow"></div>
+            </li>
+            <li arrow="normal">
+                <div class="ico ico_arrow larrow_normal"></div>
+            </li>
+            <li arrow="solidDiamond">
+                <div class="ico ico_arrow larrow_soliddiamond"></div>
+            </li>
+            <li arrow="dashedDiamond">
+                <div class="ico ico_arrow larrow_dasheddiamond"></div>
+            </li>
+            <li arrow="solidCircle">
+                <div class="ico ico_arrow larrow_solidcircle"></div>
+            </li>
+            <li arrow="dashedCircle">
+                <div class="ico ico_arrow larrow_dashedcircle"></div>
+            </li>
+            <li arrow="cross">
+                <div class="ico ico_arrow larrow_cross"></div>
+            </li>
+        </ul>
+        <ul id="endarrow_list" class="menu list menu_ico" style="display: none;">
+            <li arrow="none">
+                <div class="ico ico_arrow rarrow_none"></div>
+            </li>
+            <li arrow="solidArrow">
+                <div class="ico ico_arrow rarrow_solidarrow"></div>
+            </li>
+            <li arrow="dashedArrow">
+                <div class="ico ico_arrow rarrow_dashedarrow"></div>
+            </li>
+            <li arrow="normal">
+                <div class="ico ico_arrow rarrow_normal"></div>
+            </li>
+            <li arrow="solidDiamond">
+                <div class="ico ico_arrow rarrow_soliddiamond"></div>
+            </li>
+            <li arrow="dashedDiamond">
+                <div class="ico ico_arrow rarrow_dasheddiamond"></div>
+            </li>
+            <li arrow="solidCircle">
+                <div class="ico ico_arrow rarrow_solidcircle"></div>
+            </li>
+            <li arrow="dashedCircle">
+                <div class="ico ico_arrow rarrow_dashedcircle"></div>
+            </li>
+            <li arrow="cross">
+                <div class="ico ico_arrow rarrow_cross"></div>
+            </li>
+        </ul>
+        <div id='hotkey_list' class='dialog'>
+            <div class='dialog_header'>快捷键列表</div>
+            <div class='dialog_content'>
+                <div class="hotkey_content">
+                    <span class="hotkey_line hotkey_group">通用 </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Alt</span>
+                        <span class="hotkey_desc">按住Alt，通过鼠标可以对页面进行拖动 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl</span>
+                        <span class="hotkey_desc">按住Ctrl，点击一个图形，将其添加到选择图形中，或者从中移除 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Alt + (+) , Alt + (-)</span>
+                        <span class="hotkey_desc">放大，缩小 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + A</span>
+                        <span class="hotkey_desc">全部选中 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Esc</span>
+                        <span class="hotkey_desc">取消选中，并取消当先操作 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">T</span>
+                        <span class="hotkey_desc">插入文本 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">I</span>
+                        <span class="hotkey_desc">插入图片 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">L</span>
+                        <span class="hotkey_desc">插入连线 </span>
+                    </span>
+                    <span class="hotkey_line null_line">&nbsp;</span>
+                    <span class="hotkey_line hotkey_group">图形被选中时 </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">箭头 (←↑↓→) </span>
+                        <span class="hotkey_desc">将选中图形向左、向上、向下、向右移动 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + 箭头 (←↑↓→) </span>
+                        <span class="hotkey_desc">每次微移一个像素 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">调整图形大小时按住Ctrl </span>
+                        <span class="hotkey_desc">调整图形大小，并且约束比例 </span>
+                    </span>
+                    <span class="hotkey_line">&nbsp;</span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + Z</span>
+                        <span class="hotkey_desc">撤销 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + Y</span>
+                        <span class="hotkey_desc">恢复 </span>
+                    </span>
+                    <span class="hotkey_line">&nbsp;</span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + X</span>
+                        <span class="hotkey_desc">剪切 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + C</span>
+                        <span class="hotkey_desc">复制 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + V</span>
+                        <span class="hotkey_desc">粘贴 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + D</span>
+                        <span class="hotkey_desc">复用 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + Shift + B</span>
+                        <span class="hotkey_desc">格式刷 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Delete, Backspace</span>
+                        <span class="hotkey_desc">删除 </span>
+                    </span>
+                    <span class="hotkey_line">&nbsp;</span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + ]</span>
+                        <span class="hotkey_desc">将选中的图形置于顶层 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + [</span>
+                        <span class="hotkey_desc">将选中的图形置于底层 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + Shift + ]</span>
+                        <span class="hotkey_desc">将选中的图形上移一层 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + Shift + [</span>
+                        <span class="hotkey_desc">将选中的图形下移一层 </span>
+                    </span>
+                    <span class="hotkey_line">&nbsp;</span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + L</span>
+                        <span class="hotkey_desc">锁定选中的图形 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + Shift + L</span>
+                        <span class="hotkey_desc">将选中的图形解锁 </span>
+                    </span>
+                    <span class="hotkey_line">&nbsp;</span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + G</span>
+                        <span class="hotkey_desc">组合选中的图形 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + Shift + G</span>
+                        <span class="hotkey_desc">将选中的图形取消组合 </span>
+                    </span>
+                    <span class="hotkey_line null_line">&nbsp;</span>
+                    <span class="hotkey_line hotkey_group">编辑文本 </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">空格 </span>
+                        <span class="hotkey_desc">编辑文本 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + B</span>
+                        <span class="hotkey_desc">粗体 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + I</span>
+                        <span class="hotkey_desc">斜体 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + U</span>
+                        <span class="hotkey_desc">下划线 </span>
+                    </span>
+                    <span class="hotkey_line">
+                        <span class="hotkey">Ctrl + Enter</span>
+                        <span class="hotkey_desc">保存文本编辑 </span>
+                    </span>
+                </div>
+            </div>
+            <div class="designer_button normal hotkey_ok" onclick="jQuery('#hotkey_list').dialogPk('close')">确定 </div>
+        </div>
+
+
+        <div id="svg_dialog" style="width:100%;height:100%;position:fixed;top:0;left:0;visibility:hidden;"></div>
+
+        <!-- Getting Started-->
+        <div class="menu mark_content mark1_content">
+            <div class="dialog_header">开始</div>
+            <div class="ico dlg_close" onclick="UI.closeGettingStart()"></div>
+            <div class="_content">把您想使用的图形拖到右侧画布上，创建画面。</div>
+            <div class="arr-icon left">
+                <div class="arr-border"></div>
+                <div class="inner-arr"></div>
+            </div>
+            <div class="mark_next">
+                <span class="designer_button normal" onclick="UI.showStartStep(2)">下一步</span>
+            </div>
+        </div>
+        <div class="menu mark_content mark2_content">
+            <div class="dialog_header">菜单栏</div>
+            <div class="ico dlg_close" onclick="UI.closeGettingStart()"></div>
+            <div class="_content">通过这些菜单，您可以调整和设置图形的属性、样式，也可以管理您的文件。</div>
+            <div class="arr-icon top">
+                <div class="arr-border"></div>
+                <div class="inner-arr"></div>
+            </div>
+            <div class="mark_next">
+                <span class="designer_button normal" onclick="UI.showStartStep(3)">下一步</span>
+            </div>
+        </div>
+        <div class="menu mark_content mark3_content">
+            <div class="dialog_header">属性工具栏</div>
+            <div class="ico dlg_close" onclick="UI.closeGettingStart()"></div>
+            <div class="_content">对选中的文本、图形、组件进行个性化设置，让他们看起来更漂亮。</div>
+            <div class="arr-icon top">
+                <div class="arr-border"></div>
+                <div class="inner-arr"></div>
+            </div>
+            <div class="mark_next">
+                <span class="designer_button normal" onclick="UI.showStartStep(4)">下一步</span>
+            </div>
+        </div>
+        <div class="menu mark_content mark4_content">
+            <div class="dialog_header">属性面板</div>
+            <div class="ico dlg_close" onclick="UI.closeGettingStart()"></div>
+            <div class="_content">这些面板让您的绘制过程更方便、简单，使用之后，您一定会喜欢。</div>
+            <div class="arr-icon right">
+                <div class="arr-border"></div>
+                <div class="inner-arr"></div>
+            </div>
+            <div class="mark_next">
+                <span class="designer_button normal" onclick="UI.closeGettingStart()">关闭</span>
+            </div>
+        </div>
+        <div class="menu mark_content markcreated_content">
+            <div class="dialog_header">编辑图形</div>
+            <div class="ico dlg_close" onclick="UI.closeGettingStart()"></div>
+            <div class="_content">
+                <p>在图形边缘的任何地方点击并拖动，您可以创建出一条漂亮的连线。（小圆点是推荐的连接点）</p>
+                <p>通过小的矩形控制点，您可以改变图形大小。（按住CTRL键可约束比例）</p>
+                <p>通过顶部的圆形控制点，对图形进行旋转。</p>
+                <p>双击可以编辑文本。（CTRL+ENTER保存文本）</p>
+            </div>
+            <div class="arr-icon left">
+                <div class="arr-border"></div>
+                <div class="inner-arr"></div>
+            </div>
+            <div class="mark_next">
+                <span class="designer_button normal" onclick="UI.closeGettingStart()">关闭</span>
+            </div>
+        </div>
+
+        <!-- Dock Drops -->
+        <ul id="dock_fill_list" class="menu list menu_ico" style="display: none; width: 198px;">
+            <li ty="none">无</li>
+            <li ty="solid">颜色</li>
+            <li ty="gradient">渐变</li>
+            <li ty="image">图片</li>
+        </ul>
+        <ul id="dock_cursor_list" class="menu list dock_page_menu menu_ico" style="display: none;">
+            <li p="auto">auto</li>
+            <!-- 默认。浏览器设置的光标（通常是一个箭头）。-->
+            <li p="crosshair">crosshair</li>
+            <!--//	光标呈现为十字线。-->
+            <li p="default">default</li>
+            <!-- // default	默认光标（通常是一个箭头）。-->
+            <li p="e-resize">e-resize</li>
+            <!--// e-resize	向右（东）的箭头，指示元素是可变尺寸的，矩形框的边缘可被向右（东）移动。-->
+            <li p="help">help</li>
+            <!--//help	带有问号的箭头，指示可用的帮助。-->
+            <li p="move">move</li>
+            <!-- // move	交叉箭头，指示某对象可被移动。-->
+            <li p="n-resize">n-resize</li>
+            <!--//向上（北）的箭头，指示元素是可变尺寸的，矩形框的边缘可被向上（北）移动。-->
+            <li p="ne-resize">ne-resize</li>
+            <!--//东北方向的箭头，指示元素是可变尺寸的，矩形框的边缘可被向上及向右移动（北/东）。-->
+            <li p="nw-resize">nw-resize</li>
+            <!--//西北方向的箭头，指示元素是可变尺寸的，矩形框的边缘可被向上及向左移动（北/西）。-->
+            <li p="pointer">pointer</li>
+            <!--//光标呈现为指示链接的指针（一只手）。-->
+            <li p="s-resize">s-resize</li>
+            <!--//向下（南）的箭头，指示元素是可变尺寸的，矩形框的边缘可被向下（南）移动。-->
+            <li p="se-resize">se-resize</li>
+            <!--//东南方向的箭头，指示元素是可变尺寸的，矩形框的边缘可被向下及向右移动（南/东）。-->
+            <li p="sw-resize">sw-resize</li>
+            <!--//西南方向的箭头，指示元素是可变尺寸的，矩形框的边缘可被向下及向左移动（南/西）。-->
+            <li p="text">text</li>
+            <!--//此光标指示文本。-->
+            <li p="url">url</li>
+            <!--//需被使用的自定义光标的 URL。提示： 请在此列表的末端始终定义一种普通的光标，以防没有由 URL 定义的可用光标。-->
+            <li p="w-resize">w-resize</li>
+            <!--//向左（西）的箭头，指示元素是可变尺寸的，矩形框的边缘可被向左（西）移动。-->
+            <li p="wait">wait</li>
+            <!--//此光标指示程序正忙（通常是一只表或沙漏）。-->
+        </ul>
+        <ul id="gradient_type_list" class="menu list menu_ico" style="display: none; z-index: 1;">
+            <li ty="linear">线性渐变</li>
+            <li ty="radial">径向渐变</li>
+        </ul>
+        <ul id="img_display_list" class="menu list" style="display: none;">
+            <li ty="fill">填充</li>
+            <li ty="fit">自适应</li>
+            <li ty="stretch">按图形伸展</li>
+            <li ty="original">原始尺寸</li>
+            <li ty="tile">平铺</li>
+        </ul>
+        <ul id="page_size_list" class="menu list dock_page_menu menu_ico" style="display: none;">
+            <li ac="set_page_size" w="1024" h="768">4:3(1024x768)</li>
+            <li ac="set_page_size" w="1280" h="720">16:9(1280x720)</li>
+            <!--<li ac="set_page_size" w="750" h="1050">A5(750x1050)</li>-->
+            <li class="devider"></li>
+            <li class="menu_text" id="dock_size_custom">自定义</li>
+            <li class="menu_text" style="line-height: 30px;">
+                <span class='lbl'>W:</span>
+                <div id="dock_size_w" class="spinner active" style="width: 75px;"></div>
+            </li>
+            <li class="menu_text" style="line-height: 30px;">
+                <span class='lbl'>H:</span>
+                <div id="dock_size_h" class="spinner active" style="width: 75px;"></div>
+            </li>
+        </ul>
+        <ul id="page_fitmode_list" class="menu list dock_page_menu menu_ico" style="display: none;">
+            <li p="fittoall">长宽自适应</li>
+            <li p="fittolong">自适应到长边</li>
+            <li p="fittoshort">自适应到短边</li>
+            <li p="fittowidth">自适应到宽度</li>
+            <li p="fittoheight">自适应到高度</li>
+            <li p="fittonone">不自适应</li>
+            <li p="fittowindow">窗体适应画面</li>
+        </ul>
+        <ul id="page_gridsize_list" class="menu list dock_page_menu menu_ico" style="display: none;">
+            <li s="10">小</li>
+            <li s="15">正常</li>
+            <li s="20">大</li>
+            <li s="30">很大</li>
+        </ul>
+        <ul id="attr_display_list" class="menu list dock_page_menu menu_ico" style="display: none;">
+            <li ty="none">无</li>
+            <li ty="text">文本</li>
+            <li ty="icon">图标</li>
+        </ul>
+        <ul id="attr_icon_list" class="menu list dock_page_menu" style="display: none;">
+            <li></li>
+        </ul>
+        <ul id="attr_location_h_list" class="menu list attr_location_menu dock_page_menu" style="display: none;">
+            <li loc="mostleft">
+                <div>
+                    <span style="left: -5px"></span>
+                </div>最左边</li>
+            <li loc="leftedge">
+                <div>
+                    <span style="left: -3px"></span>
+                </div>左边缘</li>
+            <li loc="left">
+                <div>
+                    <span style="left: 0px"></span>
+                </div>左边</li>
+            <li loc="center">
+                <div>
+                    <span style="left: 3px"></span>
+                </div>中间</li>
+            <li loc="right">
+                <div>
+                    <span style="left: 6px"></span>
+                </div>右边</li>
+            <li loc="rightedge">
+                <div>
+                    <span style="left: 9px"></span>
+                </div>右边缘</li>
+            <li loc="mostright">
+                <div>
+                    <span style="left: 11px"></span>
+                </div>最右边</li>
+        </ul>
+        <ul id="attr_location_v_list" class="menu list attr_location_menu dock_page_menu" style="display: none;">
+            <li loc="mosttop">
+                <div>
+                    <span style="top: -5px"></span>
+                </div>最上边</li>
+            <li loc="topedge">
+                <div>
+                    <span style="top: -3px"></span>
+                </div>上边缘</li>
+            <li loc="top">
+                <div>
+                    <span style="top: 0px"></span>
+                </div>顶部</li>
+            <li loc="middle">
+                <div>
+                    <span style="top: 3px"></span>
+                </div>中间</li>
+            <li loc="bottom">
+                <div>
+                    <span style="top: 6px"></span>
+                </div>底部</li>
+            <li loc="bottomedge">
+                <div>
+                    <span style="top: 9px"></span>
+                </div>下边缘</li>
+            <li loc="mostbottom">
+                <div>
+                    <span style="top: 11px"></span>
+                </div>最下边</li>
+        </ul>
+    </div>
+
+
+
+    </div>
+
+
+
+</body>
+<script>
+    // $("#saveAnimation").kendoButton();//
+    // $("input[name='animationexpr']").kendoAutoComplete({placeholder: "输入tag(驱动名称_监视器名称_点名称)"});
+    // $("#dlg-text-color-tabstrip").kendoTabStrip({//kendoui tab页面
+    //     animation:  {
+    //         open: {
+    //             effects: "fadeIn"
+    //         },
+    //         close:{}
+    //     }
+    // });
+    function choose_tag() {
+        createtagChooseGridAndLoad();
+        openTag();
+    }
+</script>
+
+</html>

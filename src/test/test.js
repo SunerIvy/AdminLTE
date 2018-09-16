@@ -1,6 +1,11 @@
 let dbUtl = require('../main/sunerivy/dao/base_dao');
-let row = dbUtl.query('select * from user');
-console.log(row);
+
+async function getData(){
+    let row = await dbUtl.query('select * from user');
+    console.log(row);
+}
+
+getData();
 
 // let dbConfig = require('../resource/db.json');
 // let dbObj = dbConfig['mysql'];
