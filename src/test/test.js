@@ -1,7 +1,7 @@
 let dbUtl = require('../main/sunerivy/dao/base_dao');
 
 async function getData(){
-    let row = await dbUtl.query('select * from user');
+    let row = await dbUtl.query('select * from t_user');
     console.log(row);
 }
 

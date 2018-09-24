@@ -18,13 +18,7 @@ let getConnection = () => {
  * @param {Array} param 
  */
 let query = async (sql, param) => {
-
-    var results = await new Promise(function (resolve,reject) {
-        opDao.query(sql, param, function(res){
-                resolve(res);
-            })
-    });
-
+    var results = await opDao.query(sql, param);
     return results;
 }
 

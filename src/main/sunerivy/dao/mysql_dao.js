@@ -26,24 +26,36 @@ void function() {
     // });
 }();
 
+let getConnection = async function() {
+    return new Promise((resolve, reject) => {
+        pool.getConnection((error, connection) => {
+            if(error){
+                reject(error);
+            }else{
+                resolve(connection);
+            }
+        })
+    })
+
+    // return await promiseConnection;
+}
+
 let query = async function( sql, values ) {
     try{
-        let promiseConnection = new Promise((resolve, reject) => {
-            pool.getConnection((error, connection) => {
-                if(error){
-                    reject(error);
-                }else{
-                    resolve(connection);
+        let connection = await getConnection();
+        
+        return new Promise((resolve, reject) => {
+            connection.query(sql, values, ( err, rows) => {
+
+                if ( err ) {
+                  reject( err )
+                } else {
+                  resolve( rows )
                 }
-            })
+                // 结束会话
+                connection.release()
+            });
         })
-        // pool.getConnection(function(error, connection){
-        //     let res =  connection.query(sql, values);
-        // });
-        let connection = await promiseConnection;
-        let res = await connection.query(sql, values);
-        connection.release();
-        return res;
     }catch(e){
         console.log(e);
     }
