@@ -16,14 +16,6 @@ void function() {
         password : password,
         database : database
     });
-
-    // connection.connect((error) => {
-    //     if(error){
-    //         throw error;
-    //     }else{
-    //         console.log('[db] [mysql] connection success!');
-    //     }
-    // });
 }();
 
 let query = async function( sql, values ) {
