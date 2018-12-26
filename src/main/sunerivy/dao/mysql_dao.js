@@ -18,24 +18,26 @@ void function() {
     });
 }();
 
-let query = async function( sql, values ) {
-    try{
-        let promiseConnection = new Promise((resolve, reject) => {
-            pool.getConnection((error, connection) => {
-                if(error){
-                    reject(error);
-                }else{
-                    resolve(connection);
-                }
-            })
+let getConnection = async function(){
+    return new Promise((resolve, reject) => {
+        pool.getConnection((error, connection) => {
+            if(error){
+                reject(error);
+            }else{
+                resolve(connection);
+            }
         })
-        // pool.getConnection(function(error, connection){
-        //     let res =  connection.query(sql, values);
-        // });
-        let connection = await promiseConnection;
-        let res = await connection.query(sql, values);
-        connection.release();
-        return res;
+    })
+}
+
+let query = async function( sql, param ) {
+    try{
+        let connection = await getConnection();
+        return new Promise(function (resolve,reject) {
+            connection.query(sql, param, function(res){
+                    resolve(res);
+                });
+        });
     }catch(e){
         console.log(e);
     }

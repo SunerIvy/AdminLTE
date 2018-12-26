@@ -19,13 +19,7 @@ let getConnection = () => {
  */
 let query = async (sql, param) => {
 
-    var results = await new Promise(function (resolve,reject) {
-        opDao.query(sql, param, function(res){
-                resolve(res);
-            })
-    });
-
-    return results;
+    return await opDao.query(sql, param);
 }
 
 exports.getConnection = getConnection;
